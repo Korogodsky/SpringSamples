@@ -1,26 +1,22 @@
 package musicplayer;
 
-import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MusicPlayer {
+public class JazzMusicPlayer {
 	
-	private List<Music> music;
-	private ClassicMusic classicMusic;
+	private Music music;
 	private String name;
 	private int volume;
 
-	public MusicPlayer() {}
+	public JazzMusicPlayer() {}
 	
-	public MusicPlayer(List<Music> music) {
+	@Autowired
+	public JazzMusicPlayer(@Qualifier("componentJazzMusic") Music music) {
 		this.music = music;
-	}
-	
-	public static MusicPlayer getMusicPlayer(List<Music> music) {
-		System.out.println("factory");
-		return new MusicPlayer(music);
 	}
 	
 	public void initMethod() {
@@ -32,20 +28,15 @@ public class MusicPlayer {
 	}
 	
 	public void playMusic() {
-		for (Music m : music) {
-			System.out.println("Playing: " + m.getSong() + " (" + getName() + ")");
-		}
-	}
-	
-	public void playClassicMusic() {
-		System.out.println("Playing: " + classicMusic.getSong() + " (" + getName() + ")");
+		System.out.println("Playing: " + music.getSong() + " (" + getName() + ")");
 	}
 
-	public List<Music> getMusic() {
+	public Music getMusic() {
 		return music;
 	}
 
-	public void setMusic(List<Music> music) {
+	//@Autowired
+	public void setMusic(JazzMusic music) {
 		this.music = music;
 	}
 
@@ -63,6 +54,11 @@ public class MusicPlayer {
 
 	public void setVolume(int volume) {
 		this.volume = volume;
+	}
+
+	@Override
+	public String toString() {
+		return music.getSong();
 	}
 	
 }

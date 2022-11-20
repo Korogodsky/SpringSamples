@@ -2,11 +2,11 @@ package musicplayer;
 
 import org.springframework.stereotype.Component;
 
-@Component("componentRockMusic")
-public class RockMusic implements Music{
+@Component("componentJazzMusic")
+public class JazzMusic implements Music {
 
 	public String getSong() {
-		return "Rock music";
+		return "Jazz music";
 	}
 
 }
